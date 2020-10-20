@@ -54,13 +54,13 @@ class Dataset(object):
     def get_image_sequence(self) -> ImageSequence:
         return self._image_sequence
 
-    def get_imu_sequence(self):
+    def get_imu_sequence(self) -> ImuSequence:
         return self._imu_sequence
 
-    def get_range_sequence(self):
+    def get_range_sequence(self) -> RangeSequence:
         return self._range_sequence
 
-    def get_ur_sequence(self):
+    def get_ur_sequence(self) -> URSequence:
         return self._ur_sequence
 
     def get_statistic(self):
