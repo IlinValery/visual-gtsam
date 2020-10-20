@@ -2,7 +2,8 @@ import datetime
 import unittest
 import numpy as np
 import cv2
-from visual_gtsam.dataset.structures import Timestamp, Vector3D, Imu, ImuSequence, ImageSequence, Image
+from visual_gtsam.dataset.structures import Timestamp, Vector3D, Imu, ImuSequence, ImageSequence, Image, RangeSequence, \
+    URSequence
 
 
 class TestStructures(unittest.TestCase):
@@ -91,4 +92,15 @@ class TestStructures(unittest.TestCase):
         print("---Stop testing of IMAGE sequence")
 
     def test_range_sequence(self):
-        pass
+        seq = RangeSequence()
+        ranges = seq.get_all_ranges()
+        self.assertIsInstance(ranges, np.ndarray)
+        self.assertEqual(len(ranges), seq.get_length())
+        self.assertAlmostEqual(1.0, ranges.mean(), delta=0.05)
+
+    def test_ur_sequence(self):
+        seq = URSequence()
+        true_trajectory = seq.get_true_trajectory()
+        self.assertIsInstance(true_trajectory, np.ndarray)
+        self.assertEqual(len(true_trajectory), seq.get_length())
+        print(true_trajectory[0])

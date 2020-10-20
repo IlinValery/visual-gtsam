@@ -1,5 +1,7 @@
 import json
 
+import numpy as np
+
 from visual_gtsam.dataset.structures import Range
 
 
@@ -44,3 +46,9 @@ class RangeSequence(object):
         else:
             self._current_idx = 0
             raise StopIteration
+
+    def get_all_ranges(self) -> np.array:
+        values = []
+        for range in self:
+            values.append(range.get_value())
+        return np.asarray(values)

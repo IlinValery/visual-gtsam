@@ -22,8 +22,8 @@ class URSequence(object):
                     tr_dict = json_line["translation"]
                     ro_dict = json_line["rotation"]
                     self._data.append(Transformation(time_dict["secs"], time_dict["nsecs"],
-                                              tr_dict["x"], tr_dict["y"], tr_dict["z"],
-                                              ro_dict["x"], ro_dict["y"], ro_dict["z"]))
+                                                     tr_dict["x"], tr_dict["y"], tr_dict["z"],
+                                                     ro_dict["x"], ro_dict["y"], ro_dict["z"]))
                 except KeyError:
                     continue
             self._length = len(self._data)
@@ -47,3 +47,12 @@ class URSequence(object):
         else:
             self._current_idx = 0
             raise StopIteration
+
+    def get_true_trajectory(self) -> np.array:
+        values = None
+        for transform in self:
+            if values is not None:
+                values = np.vstack((values, transform.get_translation()))
+            else:
+                values = transform.get_translation()
+        return values
