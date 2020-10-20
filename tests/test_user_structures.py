@@ -12,6 +12,9 @@ class TestStructures(unittest.TestCase):
                                               'z': 8.293810844421387}}
     _data_image_test = {"path": "images/1594379846_0111020088.png", "time": {"secs": 1594379846, "nsecs": 111020088}}
 
+    _data_range_test = None
+    _data_ur_test = None
+
     def test_time(self):
         secs = self._data_imu_test["time"]["secs"]
         nsecs = self._data_imu_test["time"]["nsecs"]
@@ -87,3 +90,5 @@ class TestStructures(unittest.TestCase):
         self.assertEqual(image_seq.get_next().get_origin_rgb().shape, (480, 640, 3))
         print("---Stop testing of IMAGE sequence")
 
+    def test_range_sequence(self):
+        pass
